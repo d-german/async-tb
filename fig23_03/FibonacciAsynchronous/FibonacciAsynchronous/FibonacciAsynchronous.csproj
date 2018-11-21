@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A8633007-BD7F-4574-86FD-41FA08EA6E72}</ProjectGuid>
+    <ProjectGuid>{9564CD97-1357-48C9-9D4B-67A9EBA7703A}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FibonacciAsynchronous</RootNamespace>
