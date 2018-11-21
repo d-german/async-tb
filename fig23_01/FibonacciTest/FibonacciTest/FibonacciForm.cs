@@ -18,25 +18,35 @@ namespace FibonacciTest
       }
 
       // start an async Task to calculate specified Fibonacci number
-      private async void calculateButton_Click(object sender, EventArgs e)
-      {
-         // retrieve user's input as an integer
-         int number = int.Parse(inputTextBox.Text);
+//      private async void calculateButton_Click(object sender, EventArgs e)
+//      {
+//         // retrieve user's input as an integer
+//         int number = int.Parse(inputTextBox.Text);
+//
+//         asyncResultLabel.Text = "Calculating...";
+//
+//         // Task to perform Fibonacci calculation in separate thread
+//         Task<long> fibonacciTask = Task.Run(() => Fibonacci(number));
+//
+//         // wait for Task in separate thread to complete
+//         await fibonacciTask;
+//
+//         // display result after Task in separate thread completes
+//         asyncResultLabel.Text = fibonacciTask.Result.ToString();
+//      }
+        private void calculateButton_Click(object sender, EventArgs e)
+        {
+            // retrieve user's input as an integer
+            int number = int.Parse(inputTextBox.Text);
 
-         asyncResultLabel.Text = "Calculating...";
+            asyncResultLabel.Text = "Calculating...";
 
-         // Task to perform Fibonacci calculation in separate thread
-         Task<long> fibonacciTask = Task.Run(() => Fibonacci(number));
+            // display result after Task in separate thread completes
+            asyncResultLabel.Text = Fibonacci(number).ToString();
+        }
 
-         // wait for Task in separate thread to complete
-         await fibonacciTask;
-
-         // display result after Task in separate thread completes
-         asyncResultLabel.Text = fibonacciTask.Result.ToString();
-      }
-
-      // calculate next Fibonacci number iteratively
-      private void nextNumberButton_Click(object sender, EventArgs e)
+        // calculate next Fibonacci number iteratively
+        private void nextNumberButton_Click(object sender, EventArgs e)
       {
          // calculate the next Fibonacci number
          long temp = n1 + n2; // calculate next Fibonacci number
