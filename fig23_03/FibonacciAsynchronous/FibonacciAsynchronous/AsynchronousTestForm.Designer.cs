@@ -36,30 +36,30 @@
          // label1
          // 
          this.label1.AutoSize = true;
-         this.label1.Location = new System.Drawing.Point(13, 13);
+         this.label1.Location = new System.Drawing.Point(15, 15);
          this.label1.Name = "label1";
-         this.label1.Size = new System.Drawing.Size(289, 13);
+         this.label1.Size = new System.Drawing.Size(319, 15);
          this.label1.TabIndex = 0;
          this.label1.Text = "Calls to Fibonacci(46) and Fibonacci(45) in separate threads";
          // 
          // outputTextBox
          // 
-         this.outputTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-         this.outputTextBox.Location = new System.Drawing.Point(13, 59);
+         this.outputTextBox.Anchor =
+            ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) |
+                                                   System.Windows.Forms.AnchorStyles.Right)));
+         this.outputTextBox.Location = new System.Drawing.Point(15, 68);
          this.outputTextBox.Multiline = true;
          this.outputTextBox.Name = "outputTextBox";
-         this.outputTextBox.Size = new System.Drawing.Size(290, 191);
+         this.outputTextBox.Size = new System.Drawing.Size(338, 220);
          this.outputTextBox.TabIndex = 1;
          // 
          // startButton
          // 
-         this.startButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-         this.startButton.Location = new System.Drawing.Point(12, 30);
+         this.startButton.Anchor =
+            ((System.Windows.Forms.AnchorStyles) (((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
+         this.startButton.Location = new System.Drawing.Point(14, 35);
          this.startButton.Name = "startButton";
-         this.startButton.Size = new System.Drawing.Size(291, 23);
+         this.startButton.Size = new System.Drawing.Size(339, 27);
          this.startButton.TabIndex = 2;
          this.startButton.Text = "Start Asynchronous Fibonacci Calls";
          this.startButton.UseVisualStyleBackColor = true;
@@ -67,9 +67,9 @@
          // 
          // AsynchronousTestForm
          // 
-         this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+         this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-         this.ClientSize = new System.Drawing.Size(315, 262);
+         this.ClientSize = new System.Drawing.Size(367, 302);
          this.Controls.Add(this.startButton);
          this.Controls.Add(this.outputTextBox);
          this.Controls.Add(this.label1);
@@ -77,7 +77,6 @@
          this.Text = "Asynchronous Test";
          this.ResumeLayout(false);
          this.PerformLayout();
-
       }
 
       #endregion

@@ -46,7 +46,7 @@ namespace FindPrimes
 
             // show primes up to maximum
             var count = await FindPrimes1(maximum); 
-            //var count = await FindPrimes2(maximum);
+            // var count = await FindPrimes2(maximum);
             //var count = await Task.Run(() => FindPrimes3(maximum));
 
             statusLabel.Text = $@"Found {count} prime(s) in {stopWatch.ElapsedMilliseconds} ms";
@@ -62,7 +62,7 @@ namespace FindPrimes
             for (var i = 2; i < maximum && !Canceled; ++i)
             {
                 // if i is prime, display it
-                if (await Task.FromResult(IsPrime(i)))
+                if (await Task.Run(() => IsPrime(i)))
                 {
                     ++primeCount; // increment number of primes found
                     primesTextBox.AppendText($"{i}{Environment.NewLine}");
@@ -94,13 +94,13 @@ namespace FindPrimes
             for (var i = 2; i < maximum && !Canceled; ++i)
             {
                 // if i is prime, display it
-                if (await Task.FromResult(IsPrime(i)))
+                if (await Task.Run(() => IsPrime(i)))
                 {
                     ++primeCount; // increment number of primes found
                     primesTextBox.AppendText($"{i}{Environment.NewLine}");
                 }
 
-                if (i % 50 == 0)
+                if (i % 5 == 0)
                 {
                     await Task.Delay(1);
                 }

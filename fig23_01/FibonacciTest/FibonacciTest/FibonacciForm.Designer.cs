@@ -47,9 +47,9 @@
          this.groupBox1.Controls.Add(this.calculateButton);
          this.groupBox1.Controls.Add(this.inputTextBox);
          this.groupBox1.Controls.Add(this.label1);
-         this.groupBox1.Location = new System.Drawing.Point(13, 13);
+         this.groupBox1.Location = new System.Drawing.Point(15, 15);
          this.groupBox1.Name = "groupBox1";
-         this.groupBox1.Size = new System.Drawing.Size(214, 79);
+         this.groupBox1.Size = new System.Drawing.Size(250, 91);
          this.groupBox1.TabIndex = 0;
          this.groupBox1.TabStop = false;
          this.groupBox1.Text = "Calculate Asynchronously";
@@ -57,16 +57,16 @@
          // asyncResultLabel
          // 
          this.asyncResultLabel.AutoSize = true;
-         this.asyncResultLabel.Location = new System.Drawing.Point(102, 51);
+         this.asyncResultLabel.Location = new System.Drawing.Point(119, 59);
          this.asyncResultLabel.Name = "asyncResultLabel";
-         this.asyncResultLabel.Size = new System.Drawing.Size(0, 13);
+         this.asyncResultLabel.Size = new System.Drawing.Size(0, 15);
          this.asyncResultLabel.TabIndex = 3;
          // 
          // calculateButton
          // 
-         this.calculateButton.Location = new System.Drawing.Point(11, 46);
+         this.calculateButton.Location = new System.Drawing.Point(13, 53);
          this.calculateButton.Name = "calculateButton";
-         this.calculateButton.Size = new System.Drawing.Size(85, 23);
+         this.calculateButton.Size = new System.Drawing.Size(99, 27);
          this.calculateButton.TabIndex = 2;
          this.calculateButton.Text = "Calculate";
          this.calculateButton.UseVisualStyleBackColor = true;
@@ -74,17 +74,17 @@
          // 
          // inputTextBox
          // 
-         this.inputTextBox.Location = new System.Drawing.Point(102, 20);
+         this.inputTextBox.Location = new System.Drawing.Point(119, 23);
          this.inputTextBox.Name = "inputTextBox";
-         this.inputTextBox.Size = new System.Drawing.Size(100, 20);
+         this.inputTextBox.Size = new System.Drawing.Size(116, 23);
          this.inputTextBox.TabIndex = 1;
          // 
          // label1
          // 
          this.label1.AutoSize = true;
-         this.label1.Location = new System.Drawing.Point(8, 23);
+         this.label1.Location = new System.Drawing.Point(9, 27);
          this.label1.Name = "label1";
-         this.label1.Size = new System.Drawing.Size(88, 13);
+         this.label1.Size = new System.Drawing.Size(96, 15);
          this.label1.TabIndex = 0;
          this.label1.Text = "Get Fibonacci of:";
          // 
@@ -93,9 +93,9 @@
          this.groupBox2.Controls.Add(this.syncResultLabel);
          this.groupBox2.Controls.Add(this.nextNumberButton);
          this.groupBox2.Controls.Add(this.displayLabel);
-         this.groupBox2.Location = new System.Drawing.Point(13, 119);
+         this.groupBox2.Location = new System.Drawing.Point(15, 137);
          this.groupBox2.Name = "groupBox2";
-         this.groupBox2.Size = new System.Drawing.Size(214, 84);
+         this.groupBox2.Size = new System.Drawing.Size(250, 97);
          this.groupBox2.TabIndex = 1;
          this.groupBox2.TabStop = false;
          this.groupBox2.Text = "Calculate Synchronously";
@@ -103,16 +103,16 @@
          // syncResultLabel
          // 
          this.syncResultLabel.AutoSize = true;
-         this.syncResultLabel.Location = new System.Drawing.Point(102, 27);
+         this.syncResultLabel.Location = new System.Drawing.Point(119, 31);
          this.syncResultLabel.Name = "syncResultLabel";
-         this.syncResultLabel.Size = new System.Drawing.Size(0, 13);
+         this.syncResultLabel.Size = new System.Drawing.Size(0, 15);
          this.syncResultLabel.TabIndex = 6;
          // 
          // nextNumberButton
          // 
-         this.nextNumberButton.Location = new System.Drawing.Point(11, 50);
+         this.nextNumberButton.Location = new System.Drawing.Point(13, 58);
          this.nextNumberButton.Name = "nextNumberButton";
-         this.nextNumberButton.Size = new System.Drawing.Size(85, 23);
+         this.nextNumberButton.Size = new System.Drawing.Size(99, 27);
          this.nextNumberButton.TabIndex = 5;
          this.nextNumberButton.Text = "Next Number";
          this.nextNumberButton.UseVisualStyleBackColor = true;
@@ -121,16 +121,16 @@
          // displayLabel
          // 
          this.displayLabel.AutoSize = true;
-         this.displayLabel.Location = new System.Drawing.Point(8, 27);
+         this.displayLabel.Location = new System.Drawing.Point(9, 31);
          this.displayLabel.Name = "displayLabel";
-         this.displayLabel.Size = new System.Drawing.Size(0, 13);
+         this.displayLabel.Size = new System.Drawing.Size(0, 15);
          this.displayLabel.TabIndex = 4;
          // 
          // FibonacciForm
          // 
-         this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+         this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-         this.ClientSize = new System.Drawing.Size(240, 214);
+         this.ClientSize = new System.Drawing.Size(280, 247);
          this.Controls.Add(this.groupBox2);
          this.Controls.Add(this.groupBox1);
          this.Name = "FibonacciForm";
@@ -140,7 +140,6 @@
          this.groupBox2.ResumeLayout(false);
          this.groupBox2.PerformLayout();
          this.ResumeLayout(false);
-
       }
 
       #endregion
