@@ -2,6 +2,7 @@
 // Displaying an asynchronous task's progress and intermediate results
 
 using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -10,7 +11,7 @@ namespace FindPrimes
 {
     public partial class FindPrimesForm : Form
     {
-        private bool[] primes; // array used to determine primes
+        private bool[] _primes; // array used to determine primes
 
         public FindPrimesForm()
         {
@@ -25,11 +26,13 @@ namespace FindPrimes
         // handles getPrimesButton's click event
         private async void getPrimesButton_Click(object sender, EventArgs e)
         {
+            var stopWatch = new Stopwatch();
+            stopWatch.Start();
             // get user input
             var maximum = int.Parse(maxValueTextBox.Text);
 
             // create array for determining primes
-            primes = Enumerable.Repeat(true, maximum).ToArray();
+            _primes = Enumerable.Repeat(true, maximum).ToArray();
 
             // reset Canceled and GUI
             Canceled = false;
@@ -43,22 +46,14 @@ namespace FindPrimes
 
             // show primes up to maximum
             var count = await FindPrimes1(maximum); 
-            // var count = await FindPrimes2(maximum); 
+            //var count = await FindPrimes2(maximum);
             //var count = await Task.Run(() => FindPrimes3(maximum));
 
-//            var dist = (int) Math.Floor((decimal) (maximum / 4));
-//            const int min = 2;
-//            var t1 = Task.Run(() => FindPrimes4(min, min + 1 * dist));
-//            var t2 = Task.Run(() => FindPrimes4(min + dist, min + 2 * dist));
-//            var t3 = Task.Run(() => FindPrimes4(min + dist, min + 3 * dist));
-//            var t4 = Task.Run(() => FindPrimes4(min + dist, (4 * dist)));
-//            var res = await Task.WhenAll(t1, t2, t3, t4);
-//            var count = res.Sum();
-
-            statusLabel.Text = $"Found {count} prime(s)";
+            statusLabel.Text = $@"Found {count} prime(s) in {stopWatch.ElapsedMilliseconds} ms";
         }
 
         // displays prime numbers in primesTextBox
+        // TODO: You may not be able to cancel this
         private async Task<int> FindPrimes1(int maximum)
         {
             var primeCount = 0;
@@ -67,7 +62,7 @@ namespace FindPrimes
             for (var i = 2; i < maximum && !Canceled; ++i)
             {
                 // if i is prime, display it
-                if (await Task.Run(() => IsPrime(i)))
+                if (await Task.FromResult(IsPrime(i)))
                 {
                     ++primeCount; // increment number of primes found
                     primesTextBox.AppendText($"{i}{Environment.NewLine}");
@@ -99,15 +94,15 @@ namespace FindPrimes
             for (var i = 2; i < maximum && !Canceled; ++i)
             {
                 // if i is prime, display it
-                if (await Task.Run(() => IsPrime(i)))
+                if (await Task.FromResult(IsPrime(i)))
                 {
                     ++primeCount; // increment number of primes found
                     primesTextBox.AppendText($"{i}{Environment.NewLine}");
                 }
-                else
+
+                if (i % 50 == 0)
                 {
                     await Task.Delay(1);
-                    //Thread.Sleep(1);
                 }
 
                 var percentage = (double) progressBar.Value /
@@ -135,92 +130,63 @@ namespace FindPrimes
             for (var i = 2; i < maximum && !Canceled; ++i)
             {
                 // if i is prime, display it
-                if (await Task.Run(() => IsPrime(i)))
+                if (await Task.FromResult(IsPrime(i)))
+                {
+                    if (InvokeRequired)
+                    {
+                        Invoke(new MethodInvoker(() =>
+                        {
+                            ++primeCount; // increment number of primes found
+                            primesTextBox.AppendText($"{i}{Environment.NewLine}");
+                        }));
+                    }
+                }
+
+                if (InvokeRequired)
                 {
                     Invoke(new MethodInvoker(() =>
                     {
-                        ++primeCount; // increment number of primes found
-                        primesTextBox.AppendText($"{i}{Environment.NewLine}");
+                        var percentage = (double) progressBar.Value /
+                                         (progressBar.Maximum - progressBar.Minimum + 1);
+                        percentageLabel.Text = $"{percentage:P0}";
+                        progressBar.Value = i + 1; // update progress
                     }));
                 }
-
-                Invoke(new MethodInvoker(() =>
-                {
-                    var percentage = (double) progressBar.Value /
-                                     (progressBar.Maximum - progressBar.Minimum + 1);
-                    percentageLabel.Text = $"{percentage:P0}";
-                    progressBar.Value = i + 1; // update progress
-                }));
             }
 
             // display message if operation was canceled
-            if (Canceled)
+            if (InvokeRequired)
             {
-                Invoke(new MethodInvoker(() => { primesTextBox.AppendText($"Canceled{Environment.NewLine}"); }));
+                if (Canceled)
+                {
+                    Invoke(new MethodInvoker(() => { primesTextBox.AppendText($"Canceled{Environment.NewLine}"); }));
+                }
             }
 
-            Invoke(new MethodInvoker(() =>
+            if (InvokeRequired)
             {
-                getPrimesButton.Enabled = true; // enable getPrimesButton
-                cancelButton.Enabled = false; // disable cancelButton
-            }));
-
-            return primeCount;
-        }
-
-        private async Task<int> FindPrimes4(int minimum, int maximum)
-        {
-            var primeCount = 0;
-
-            // find primes less than maximum
-            for (var i = minimum; i < maximum && !Canceled; ++i)
-            {
-                // if i is prime, display it
-                if (await Task.Run(() => IsPrime(i)))
-                {
-                    Invoke(new MethodInvoker(() =>
-                    {
-                        ++primeCount; // increment number of primes found
-                        primesTextBox.AppendText($"{i}{Environment.NewLine}");
-                    }));
-                }
-
                 Invoke(new MethodInvoker(() =>
                 {
-                    var percentage = (double) progressBar.Value /
-                                     (progressBar.Maximum - progressBar.Minimum + 1);
-                    percentageLabel.Text = $"{percentage:P0}";
-                    progressBar.Value = i + 1; // update progress
+                    getPrimesButton.Enabled = true; // enable getPrimesButton
+                    cancelButton.Enabled = false; // disable cancelButton
                 }));
             }
-
-            // display message if operation was canceled
-            if (Canceled)
-            {
-                Invoke(new MethodInvoker(() => { primesTextBox.AppendText($"Canceled{Environment.NewLine}"); }));
-            }
-
-            Invoke(new MethodInvoker(() =>
-            {
-                getPrimesButton.Enabled = true; // enable getPrimesButton
-                cancelButton.Enabled = false; // disable cancelButton
-            }));
 
             return primeCount;
         }
 
         // check whether value is a prime number 
         // and mark all multiples as not prime
-        public bool IsPrime(int value)
+        private bool IsPrime(int value)
         {
             // if value is prime, mark all of multiples
             // as not prime and return true
-            if (primes[value])
+            if (_primes[value])
             {
                 // mark all multiples of value as not prime
-                for (var i = value + value; i < primes.Length; i += value)
+                for (var i = value + value; i < _primes.Length; i += value)
                 {
-                    primes[i] = false; // i is not prime
+                    _primes[i] = false; // i is not prime
                 }
 
                 return true;
